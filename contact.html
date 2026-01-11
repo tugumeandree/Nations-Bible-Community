@@ -32,13 +32,14 @@
     <main>
       <section class="section">
         <div class="container">
-          <h1 class="section-title">Contact Us</h1>
-          <p>We’d love to hear from you. Send us a message and our team will respond shortly.</p>
+          <h1 class="section-title" id="page-title">Contact Us</h1>
+          <p id="page-description">We'd love to hear from you. Send us a message and our team will respond shortly.</p>
           <form id="contact-form" class="card" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
             <p class="hidden">
-              <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
             </p>
             <input type="hidden" name="form-name" value="contact" />
+            <input type="hidden" id="inquiry-type" name="inquiry-type" value="general" />
             <div class="grid cols-2">
               <div class="field">
                 <label for="name">Full name</label>
@@ -120,7 +121,34 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
-  </body>
+    <script>
+      // Handle support type from URL parameters
+      document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('type');
+        const pageTitle = document.getElementById('page-title');
+        const pageDescription = document.getElementById('page-description');
+        const inquiryType = document.getElementById('inquiry-type');
+        const messageField = document.getElementById('message');
+        
+        if (type === 'partner') {
+          pageTitle.textContent = 'Become a Ministry Partner';
+          pageDescription.textContent = 'Thank you for your interest in partnering with Nations Bible Community. Please share your information and we\'ll connect with you about ongoing partnership opportunities.';
+          inquiryType.value = 'partnership';
+          messageField.placeholder = 'Tell us about your interest in becoming a monthly partner...';
+        } else if (type === 'give') {
+          pageTitle.textContent = 'Give a One-Time Gift';
+          pageDescription.textContent = 'Your generosity helps us provide free biblical education to believers worldwide. Please share your information and we\'ll send you details for making a one-time contribution.';
+          inquiryType.value = 'one-time-gift';
+          messageField.placeholder = 'Any specific purpose for your gift? (Optional)';
+        } else if (type === 'tithe') {
+          pageTitle.textContent = 'Tithe Online';
+          pageDescription.textContent = 'Thank you for your faithfulness in tithing. Please share your information and we\'ll provide you with our secure online giving portal and account details.';
+          inquiryType.value = 'tithe';
+          messageField.placeholder = 'Would you like to set up recurring tithing? Let us know your preference...';
+        }
+      });
+    </script>
   </html>
 
 
