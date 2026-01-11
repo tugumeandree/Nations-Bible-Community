@@ -1,1 +1,1 @@
-# Nations-Bible-Fellowship
+# Nations-Bible-Community

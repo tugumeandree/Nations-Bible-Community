@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/thank-you"
+  to = "/thank-you.html"
+  status = 301
+
+# Enable Netlify Identity for CMS authentication
+[build.environment]
+  NODE_VERSION = "18"
+
